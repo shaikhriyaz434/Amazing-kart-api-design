@@ -1,6 +1,6 @@
 openapi: 3.0.0
 paths:
-  /v1/api/Users:
+  /v1/api/users:
     get:
       operationId: UserController_getUsers
       parameters:
@@ -75,7 +75,7 @@ paths:
         - Users
       security:
         - bearer: []
-  /v1/api/Users/{userId}:
+  /v1/api/users/{userId}:
     get:
       operationId: UserController_getUserById
       parameters:
@@ -156,7 +156,7 @@ paths:
         - Users
       security:
         - bearer: []
-  /v1/api/Users/{userId}/Addresses:
+  /v1/api/users/{userId}/Addresses:
     get:
       operationId: UserController_getUserAddress
       parameters:
@@ -194,7 +194,7 @@ paths:
         - Users
       security:
         - bearer: []
-  /v1/api/Users/{userId}/orders:
+  /v1/api/users/{userId}/orders:
     get:
       operationId: UserController_getUserOrders
       parameters:
@@ -425,7 +425,7 @@ paths:
           description: Gateway Timeout
       tags:
         - Products
-  /v1/api/Address:
+  /v1/api/addresses:
     get:
       operationId: AddressController_findAllAddress
       parameters:
@@ -504,7 +504,7 @@ paths:
         - Address
       security:
         - bearer: []
-  /v1/api/Address/{addressId}:
+  /v1/api/addresses/{addressId}:
     get:
       operationId: AddressController_findAddressById
       parameters:
@@ -618,7 +618,7 @@ paths:
         - Address
       security:
         - bearer: []
-  /v1/api/Category:
+  /v1/api/categories:
     get:
       operationId: CategoryController_findAllCategory
       parameters:
@@ -693,7 +693,7 @@ paths:
           description: Gateway Timeout
       tags:
         - Category
-  /v1/api/Category/{categoryId}:
+  /v1/api/categories/{categoryId}:
     get:
       operationId: CategoryController_findCategoryById
       parameters:
@@ -766,7 +766,7 @@ paths:
           description: Gateway Timeout
       tags:
         - Category
-  /v1/api/Order:
+  /v1/api/orders:
     get:
       operationId: OrderController_findAllOrder
       parameters:
@@ -845,7 +845,7 @@ paths:
         - Order
       security:
         - bearer: []
-  /v1/api/Order/{orderId}:
+  /v1/api/orders/{orderId}:
     get:
       operationId: OrderController_findOrderById
       parameters:
@@ -926,7 +926,7 @@ paths:
         - Order
       security:
         - bearer: []
-  /v1/api/Order/{orderId}/cancel:
+  /v1/api/orders/{orderId}/cancel:
     post:
       operationId: OrderController_cancel
       parameters:
@@ -1075,7 +1075,7 @@ paths:
         - Actions
       security:
         - bearer: []
-  /v1/api/Inventory:
+  /v1/api/inventories:
     get:
       operationId: InventoryController_findAllInventory
       parameters:
@@ -1154,7 +1154,7 @@ paths:
         - Inventory
       security:
         - bearer: []
-  /v1/api/Inventory/{inventoryId}:
+  /v1/api/inventories/{inventoryId}:
     get:
       operationId: InventoryController_findInventoryById
       parameters:
@@ -1268,7 +1268,7 @@ paths:
         - Inventory
       security:
         - bearer: []
-  /v1/api/Payment:
+  /v1/api/payments:
     get:
       operationId: PaymentController_findAllPayment
       parameters:
@@ -1305,7 +1305,7 @@ paths:
           description: Gateway Timeout
       tags:
         - Payments
-  /v1/api/Payment/{paymentId}:
+  /v1/api/payments/{paymentId}:
     get:
       operationId: PaymentController_findPaymentById
       parameters:
