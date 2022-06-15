@@ -1,0 +1,1947 @@
+openapi: 3.0.0
+paths:
+  /v1/api/Users:
+    get:
+      operationId: UserController_getUsers
+      parameters:
+        - name: offset
+          required: false
+          in: query
+          schema:
+            type: number
+        - name: limit
+          required: false
+          in: query
+          schema:
+            type: number
+        - name: timestamp
+          in: header
+          schema:
+            type: string
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserListResponse'
+        '400':
+          description: Bad Request
+        '401':
+          description: Request Unauthorized
+        '500':
+          description: Internal Server Error
+        '502':
+          description: Bad Gateway
+        '504':
+          description: Gateway Timeout
+      tags:
+        - Users
+      security:
+        - bearer: []
+    post:
+      operationId: UserController_createUser
+      parameters:
+        - name: timestamp
+          in: header
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserReqBody'
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+        '400':
+          description: Bad Request
+        '401':
+          description: Request Unauthorized
+        '406':
+          description: Not Acceptable
+        '500':
+          description: Internal Server Error
+        '502':
+          description: Bad Gateway
+        '504':
+          description: Gateway Timeout
+      tags:
+        - Users
+      security:
+        - bearer: []
+  /v1/api/Users/{userId}:
+    get:
+      operationId: UserController_getUserById
+      parameters:
+        - name: userId
+          required: true
+          in: path
+          schema:
+            type: string
+        - name: timestamp
+          in: header
+          schema:
+            type: string
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+        '400':
+          description: Bad Request
+        '401':
+          description: Request Unauthorized
+        '404':
+          description: Not Found
+        '500':
+          description: Internal Server Error
+        '502':
+          description: Bad Gateway
+        '504':
+          description: Gateway Timeout
+      tags:
+        - Users
+      security:
+        - bearer: []
+    patch:
+      operationId: UserController_updateUserById
+      parameters:
+        - name: userId
+          required: true
+          in: path
+          schema:
+            type: string
+        - name: timestamp
+          in: header
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserReqBody'
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+        '204':
+          description: No Content
+        '400':
+          description: Bad Request
+        '401':
+          description: Request Unauthorized
+        '404':
+          description: Not Found
+        '406':
+          description: Not Acceptable
+        '500':
+          description: Internal Server Error
+        '502':
+          description: Bad Gateway
+        '504':
+          description: Gateway Timeout
+      tags:
+        - Users
+      security:
+        - bearer: []
+  /v1/api/Users/{userId}/Addresses:
+    get:
+      operationId: UserController_getUserAddress
+      parameters:
+        - name: userId
+          required: true
+          in: path
+          schema:
+            type: string
+        - name: timestamp
+          in: header
+          schema:
+            type: string
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/AddressResponse'
+        '400':
+          description: Bad Request
+        '401':
+          description: Request Unauthorized
+        '404':
+          description: Not Found
+        '500':
+          description: Internal Server Error
+        '502':
+          description: Bad Gateway
+        '504':
+          description: Gateway Timeout
+      tags:
+        - Users
+      security:
+        - bearer: []
+  /v1/api/Users/{userId}/orders:
+    get:
+      operationId: UserController_getUserOrders
+      parameters:
+        - name: userId
+          required: true
+          in: path
+          schema:
+            type: string
+        - name: timestamp
+          in: header
+          schema:
+            type: string
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Order'
+        '400':
+          description: Bad Request
+        '401':
+          description: Request Unauthorized
+        '404':
+          description: Not Found
+        '500':
+          description: Internal Server Error
+        '502':
+          description: Bad Gateway
+        '504':
+          description: Gateway Timeout
+      tags:
+        - Users
+      security:
+        - bearer: []
+  /v1/api/products:
+    get:
+      operationId: ProductsController_findAllProducts
+      parameters:
+        - name: offset
+          required: false
+          in: query
+          schema:
+            type: number
+        - name: limit
+          required: false
+          in: query
+          schema:
+            type: number
+        - name: category
+          required: false
+          in: query
+          schema:
+            type: string
+        - name: search
+          required: false
+          in: query
+          schema:
+            type: string
+        - name: timestamp
+          in: header
+          schema:
+            type: string
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProductListResponse'
+        '400':
+          description: Bad Request
+        '401':
+          description: Request Unauthorized
+        '500':
+          description: Internal Server Error
+        '502':
+          description: Bad Gateway
+        '504':
+          description: Gateway Timeout
+      tags:
+        - Products
+    post:
+      operationId: ProductsController_createProduct
+      parameters:
+        - name: timestamp
+          in: header
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProductReqBody'
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProductResponse'
+        '204':
+          description: No Content
+        '400':
+          description: Bad Request
+        '401':
+          description: Request Unauthorized
+        '404':
+          description: Not Found
+        '406':
+          description: Not Acceptable
+        '500':
+          description: Internal Server Error
+        '502':
+          description: Bad Gateway
+        '504':
+          description: Gateway Timeout
+      tags:
+        - Products
+  /v1/api/products/{productId}:
+    get:
+      operationId: ProductsController_findProductById
+      parameters:
+        - name: productId
+          required: true
+          in: path
+          schema:
+            type: string
+        - name: timestamp
+          in: header
+          schema:
+            type: string
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProductResponse'
+        '400':
+          description: Bad Request
+        '401':
+          description: Request Unauthorized
+        '404':
+          description: Not Found
+        '500':
+          description: Internal Server Error
+        '502':
+          description: Bad Gateway
+        '504':
+          description: Gateway Timeout
+      tags:
+        - Products
+    patch:
+      operationId: ProductsController_patchProduct
+      parameters:
+        - name: productId
+          required: true
+          in: path
+          schema:
+            type: string
+        - name: timestamp
+          in: header
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProductReqBody'
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProductResponse'
+        '204':
+          description: No Content
+        '400':
+          description: Bad Request
+        '401':
+          description: Request Unauthorized
+        '404':
+          description: Not Found
+        '406':
+          description: Not Acceptable
+        '500':
+          description: Internal Server Error
+        '502':
+          description: Bad Gateway
+        '504':
+          description: Gateway Timeout
+      tags:
+        - Products
+    delete:
+      operationId: ProductsController_deleteProduct
+      parameters:
+        - name: productId
+          required: true
+          in: path
+          schema:
+            type: string
+        - name: timestamp
+          in: header
+          schema:
+            type: string
+      responses:
+        '204':
+          description: No Content
+        '400':
+          description: Bad Request
+        '401':
+          description: Request Unauthorized
+        '404':
+          description: Not Found
+        '406':
+          description: Not Acceptable
+        '500':
+          description: Internal Server Error
+        '502':
+          description: Bad Gateway
+        '504':
+          description: Gateway Timeout
+      tags:
+        - Products
+  /v1/api/Address:
+    get:
+      operationId: AddressController_findAllAddress
+      parameters:
+        - name: offset
+          required: false
+          in: query
+          schema:
+            type: number
+        - name: limit
+          required: false
+          in: query
+          schema:
+            type: number
+        - name: timestamp
+          in: header
+          schema:
+            type: string
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AddressListResponse'
+        '400':
+          description: Bad Request
+        '401':
+          description: Request Unauthorized
+        '500':
+          description: Internal Server Error
+        '502':
+          description: Bad Gateway
+        '504':
+          description: Gateway Timeout
+      tags:
+        - Address
+      security:
+        - bearer: []
+    post:
+      operationId: AddressController_createAddress
+      parameters:
+        - name: timestamp
+          in: header
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AddressReqBody'
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Address'
+        '204':
+          description: No Content
+        '400':
+          description: Bad Request
+        '401':
+          description: Request Unauthorized
+        '404':
+          description: Not Found
+        '406':
+          description: Not Acceptable
+        '500':
+          description: Internal Server Error
+        '502':
+          description: Bad Gateway
+        '504':
+          description: Gateway Timeout
+      tags:
+        - Address
+      security:
+        - bearer: []
+  /v1/api/Address/{addressId}:
+    get:
+      operationId: AddressController_findAddressById
+      parameters:
+        - name: addressId
+          required: true
+          in: path
+          schema:
+            type: string
+        - name: timestamp
+          in: header
+          schema:
+            type: string
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Address'
+        '400':
+          description: Bad Request
+        '401':
+          description: Request Unauthorized
+        '404':
+          description: Not Found
+        '500':
+          description: Internal Server Error
+        '502':
+          description: Bad Gateway
+        '504':
+          description: Gateway Timeout
+      tags:
+        - Address
+      security:
+        - bearer: []
+    patch:
+      operationId: AddressController_patchAddress
+      parameters:
+        - name: addressId
+          required: true
+          in: path
+          schema:
+            type: string
+        - name: timestamp
+          in: header
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AddressReqBody'
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Address'
+        '204':
+          description: No Content
+        '400':
+          description: Bad Request
+        '401':
+          description: Request Unauthorized
+        '404':
+          description: Not Found
+        '406':
+          description: Not Acceptable
+        '500':
+          description: Internal Server Error
+        '502':
+          description: Bad Gateway
+        '504':
+          description: Gateway Timeout
+      tags:
+        - Address
+      security:
+        - bearer: []
+    delete:
+      operationId: AddressController_deleteProduct
+      parameters:
+        - name: addressId
+          required: true
+          in: path
+          schema:
+            type: string
+        - name: timestamp
+          in: header
+          schema:
+            type: string
+      responses:
+        '204':
+          description: No Content
+        '400':
+          description: Bad Request
+        '401':
+          description: Request Unauthorized
+        '404':
+          description: Not Found
+        '406':
+          description: Not Acceptable
+        '500':
+          description: Internal Server Error
+        '502':
+          description: Bad Gateway
+        '504':
+          description: Gateway Timeout
+      tags:
+        - Address
+      security:
+        - bearer: []
+  /v1/api/Category:
+    get:
+      operationId: CategoryController_findAllCategory
+      parameters:
+        - name: offset
+          required: false
+          in: query
+          schema:
+            type: number
+        - name: limit
+          required: false
+          in: query
+          schema:
+            type: number
+        - name: timestamp
+          in: header
+          schema:
+            type: string
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CategoryListResponse'
+        '400':
+          description: Bad Request
+        '401':
+          description: Request Unauthorized
+        '500':
+          description: Internal Server Error
+        '502':
+          description: Bad Gateway
+        '504':
+          description: Gateway Timeout
+      tags:
+        - Category
+    post:
+      operationId: CategoryController_createCategory
+      parameters:
+        - name: timestamp
+          in: header
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CategoryReqBody'
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Category'
+        '204':
+          description: No Content
+        '400':
+          description: Bad Request
+        '401':
+          description: Request Unauthorized
+        '404':
+          description: Not Found
+        '406':
+          description: Not Acceptable
+        '500':
+          description: Internal Server Error
+        '502':
+          description: Bad Gateway
+        '504':
+          description: Gateway Timeout
+      tags:
+        - Category
+  /v1/api/Category/{categoryId}:
+    get:
+      operationId: CategoryController_findCategoryById
+      parameters:
+        - name: categoryId
+          required: true
+          in: path
+          schema:
+            type: string
+        - name: timestamp
+          in: header
+          schema:
+            type: string
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Category'
+        '400':
+          description: Bad Request
+        '401':
+          description: Request Unauthorized
+        '404':
+          description: Not Found
+        '500':
+          description: Internal Server Error
+        '502':
+          description: Bad Gateway
+        '504':
+          description: Gateway Timeout
+      tags:
+        - Category
+    patch:
+      operationId: CategoryController_patchCategory
+      parameters:
+        - name: categoryId
+          required: true
+          in: path
+          schema:
+            type: string
+        - name: timestamp
+          in: header
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CategoryReqBody'
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Category'
+        '400':
+          description: Bad Request
+        '401':
+          description: Request Unauthorized
+        '404':
+          description: Not Found
+        '500':
+          description: Internal Server Error
+        '502':
+          description: Bad Gateway
+        '504':
+          description: Gateway Timeout
+      tags:
+        - Category
+  /v1/api/Order:
+    get:
+      operationId: OrderController_findAllOrder
+      parameters:
+        - name: offset
+          required: false
+          in: query
+          schema:
+            type: number
+        - name: limit
+          required: false
+          in: query
+          schema:
+            type: number
+        - name: timestamp
+          in: header
+          schema:
+            type: string
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OrderListResponse'
+        '400':
+          description: Bad Request
+        '401':
+          description: Request Unauthorized
+        '500':
+          description: Internal Server Error
+        '502':
+          description: Bad Gateway
+        '504':
+          description: Gateway Timeout
+      tags:
+        - Order
+      security:
+        - bearer: []
+    post:
+      operationId: OrderController_createOrder
+      parameters:
+        - name: timestamp
+          in: header
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OrderReqBody'
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Order'
+        '204':
+          description: No Content
+        '400':
+          description: Bad Request
+        '401':
+          description: Request Unauthorized
+        '404':
+          description: Not Found
+        '406':
+          description: Not Acceptable
+        '500':
+          description: Internal Server Error
+        '502':
+          description: Bad Gateway
+        '504':
+          description: Gateway Timeout
+      tags:
+        - Order
+      security:
+        - bearer: []
+  /v1/api/Order/{orderId}:
+    get:
+      operationId: OrderController_findOrderById
+      parameters:
+        - name: orderId
+          required: true
+          in: path
+          schema:
+            type: string
+        - name: timestamp
+          in: header
+          schema:
+            type: string
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Order'
+        '400':
+          description: Bad Request
+        '401':
+          description: Request Unauthorized
+        '404':
+          description: Not Found
+        '500':
+          description: Internal Server Error
+        '502':
+          description: Bad Gateway
+        '504':
+          description: Gateway Timeout
+      tags:
+        - Order
+      security:
+        - bearer: []
+    patch:
+      operationId: OrderController_patchOrder
+      parameters:
+        - name: orderId
+          required: true
+          in: path
+          schema:
+            type: string
+        - name: timestamp
+          in: header
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OrderReqBody'
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Order'
+        '204':
+          description: No Content
+        '400':
+          description: Bad Request
+        '401':
+          description: Request Unauthorized
+        '404':
+          description: Not Found
+        '406':
+          description: Not Acceptable
+        '500':
+          description: Internal Server Error
+        '502':
+          description: Bad Gateway
+        '504':
+          description: Gateway Timeout
+      tags:
+        - Order
+      security:
+        - bearer: []
+  /v1/api/Order/{orderId}/cancel:
+    post:
+      operationId: OrderController_cancel
+      parameters:
+        - name: orderId
+          required: true
+          in: path
+          schema:
+            type: string
+        - name: timestamp
+          in: header
+          schema:
+            type: string
+      responses:
+        '201':
+          description: ''
+        '204':
+          description: No Content
+        '400':
+          description: Bad Request
+        '401':
+          description: Request Unauthorized
+        '404':
+          description: Not Found
+        '406':
+          description: Not Acceptable
+        '500':
+          description: Internal Server Error
+        '502':
+          description: Bad Gateway
+        '504':
+          description: Gateway Timeout
+      tags:
+        - Order
+      security:
+        - bearer: []
+  /v1/api/checkout:
+    post:
+      operationId: ActionController_checkout
+      parameters:
+        - name: timestamp
+          in: header
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CheckoutRequestBody'
+      responses:
+        '204':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Cart'
+        '400':
+          description: Bad Request
+        '401':
+          description: Request Unauthorized
+        '404':
+          description: Not Found
+        '406':
+          description: Not Acceptable
+        '500':
+          description: Internal Server Error
+        '502':
+          description: Bad Gateway
+        '504':
+          description: Gateway Timeout
+      tags:
+        - Actions
+      security:
+        - bearer: []
+  /v1/api/payment:
+    post:
+      operationId: ActionController_payment
+      parameters:
+        - name: timestamp
+          in: header
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PaymentRequestBody'
+      responses:
+        '204':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Cart'
+        '400':
+          description: Bad Request
+        '401':
+          description: Request Unauthorized
+        '404':
+          description: Not Found
+        '406':
+          description: Not Acceptable
+        '500':
+          description: Internal Server Error
+        '502':
+          description: Bad Gateway
+        '504':
+          description: Gateway Timeout
+      tags:
+        - Actions
+      security:
+        - bearer: []
+  /v1/api/refund:
+    post:
+      operationId: ActionController_refund
+      parameters:
+        - name: timestamp
+          in: header
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TrxRequestBody'
+      responses:
+        '204':
+          description: ''
+        '400':
+          description: Bad Request
+        '401':
+          description: Request Unauthorized
+        '404':
+          description: Not Found
+        '406':
+          description: Not Acceptable
+        '500':
+          description: Internal Server Error
+        '502':
+          description: Bad Gateway
+        '504':
+          description: Gateway Timeout
+      tags:
+        - Actions
+      security:
+        - bearer: []
+  /v1/api/Inventory:
+    get:
+      operationId: InventoryController_findAllInventory
+      parameters:
+        - name: offset
+          required: false
+          in: query
+          schema:
+            type: number
+        - name: limit
+          required: false
+          in: query
+          schema:
+            type: number
+        - name: timestamp
+          in: header
+          schema:
+            type: string
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InventoryListResponse'
+        '400':
+          description: Bad Request
+        '401':
+          description: Request Unauthorized
+        '500':
+          description: Internal Server Error
+        '502':
+          description: Bad Gateway
+        '504':
+          description: Gateway Timeout
+      tags:
+        - Inventory
+      security:
+        - bearer: []
+    post:
+      operationId: InventoryController_createInventory
+      parameters:
+        - name: timestamp
+          in: header
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/InventoryReqBody'
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Inventory'
+        '204':
+          description: No Content
+        '400':
+          description: Bad Request
+        '401':
+          description: Request Unauthorized
+        '404':
+          description: Not Found
+        '406':
+          description: Not Acceptable
+        '500':
+          description: Internal Server Error
+        '502':
+          description: Bad Gateway
+        '504':
+          description: Gateway Timeout
+      tags:
+        - Inventory
+      security:
+        - bearer: []
+  /v1/api/Inventory/{inventoryId}:
+    get:
+      operationId: InventoryController_findInventoryById
+      parameters:
+        - name: inventoryId
+          required: true
+          in: path
+          schema:
+            type: string
+        - name: timestamp
+          in: header
+          schema:
+            type: string
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Inventory'
+        '400':
+          description: Bad Request
+        '401':
+          description: Request Unauthorized
+        '404':
+          description: Not Found
+        '500':
+          description: Internal Server Error
+        '502':
+          description: Bad Gateway
+        '504':
+          description: Gateway Timeout
+      tags:
+        - Inventory
+      security:
+        - bearer: []
+    patch:
+      operationId: InventoryController_patchInventory
+      parameters:
+        - name: inventoryId
+          required: true
+          in: path
+          schema:
+            type: string
+        - name: timestamp
+          in: header
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/InventoryReqBody'
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Inventory'
+        '204':
+          description: No Content
+        '400':
+          description: Bad Request
+        '401':
+          description: Request Unauthorized
+        '404':
+          description: Not Found
+        '406':
+          description: Not Acceptable
+        '500':
+          description: Internal Server Error
+        '502':
+          description: Bad Gateway
+        '504':
+          description: Gateway Timeout
+      tags:
+        - Inventory
+      security:
+        - bearer: []
+    delete:
+      operationId: InventoryController_deleteProduct
+      parameters:
+        - name: inventoryId
+          required: true
+          in: path
+          schema:
+            type: string
+        - name: timestamp
+          in: header
+          schema:
+            type: string
+      responses:
+        '204':
+          description: No Content
+        '400':
+          description: Bad Request
+        '401':
+          description: Request Unauthorized
+        '404':
+          description: Not Found
+        '406':
+          description: Not Acceptable
+        '500':
+          description: Internal Server Error
+        '502':
+          description: Bad Gateway
+        '504':
+          description: Gateway Timeout
+      tags:
+        - Inventory
+      security:
+        - bearer: []
+  /v1/api/Payment:
+    get:
+      operationId: PaymentController_findAllPayment
+      parameters:
+        - name: offset
+          required: false
+          in: query
+          schema:
+            type: number
+        - name: limit
+          required: false
+          in: query
+          schema:
+            type: number
+        - name: timestamp
+          in: header
+          schema:
+            type: string
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaymentListResponse'
+        '400':
+          description: Bad Request
+        '401':
+          description: Request Unauthorized
+        '500':
+          description: Internal Server Error
+        '502':
+          description: Bad Gateway
+        '504':
+          description: Gateway Timeout
+      tags:
+        - Payments
+  /v1/api/Payment/{paymentId}:
+    get:
+      operationId: PaymentController_findPaymentById
+      parameters:
+        - name: paymentId
+          required: true
+          in: path
+          schema:
+            type: string
+        - name: timestamp
+          in: header
+          schema:
+            type: string
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payment'
+        '400':
+          description: Bad Request
+        '401':
+          description: Request Unauthorized
+        '404':
+          description: Not Found
+        '500':
+          description: Internal Server Error
+        '502':
+          description: Bad Gateway
+        '504':
+          description: Gateway Timeout
+      tags:
+        - Payments
+info:
+  title: AmazingKart APIs
+  description: RESTful APIs for AmazingKart
+  version: '1.0'
+  contact: {}
+tags:
+  - name: AmazingKart
+    description: ''
+servers: []
+components:
+  securitySchemes:
+    bearer:
+      scheme: bearer
+      bearerFormat: JWT
+      type: http
+  schemas:
+    Address:
+      type: object
+      properties:
+        userId:
+          type: string
+          example: jhs343dbf-34324-34kdsjn-354
+          description: User ID [uuid]
+        addrLine1:
+          type: string
+        addrLine2:
+          type: string
+        pincode:
+          type: string
+        city:
+          type: string
+        country:
+          type: string
+        id:
+          type: string
+          example: jhs343dbf-34324-34kdsjn-354
+          description: Product ID [uuid]
+      required:
+        - userId
+        - addrLine1
+        - addrLine2
+        - pincode
+        - city
+        - country
+        - id
+    Link:
+      type: object
+      properties:
+        rel:
+          type: string
+          description: Relation
+        href:
+          type: string
+          description: HREF
+        type:
+          type: string
+          description: Type
+      required:
+        - rel
+        - href
+        - type
+    User:
+      type: object
+      properties:
+        usernames:
+          type: string
+        email:
+          type: string
+        addresses:
+          type: array
+          items:
+            $ref: '#/components/schemas/Address'
+        id:
+          type: string
+          example: jhs343dbf-34324-34kdsjn-354
+          description: Product ID [uuid]
+        links:
+          type: array
+          items:
+            $ref: '#/components/schemas/Link'
+      required:
+        - usernames
+        - email
+        - addresses
+        - id
+        - links
+    PageInfo:
+      type: object
+      properties:
+        totalCount:
+          type: number
+          example: 2000
+          description: total number of items
+        pageSize:
+          type: number
+          example: 20
+          description: total number of items in the response
+        pageIndex:
+          type: number
+          example: 0
+          description: Current page offset
+      required:
+        - totalCount
+        - pageSize
+        - pageIndex
+    UserListResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/User'
+        pageInfo:
+          $ref: '#/components/schemas/PageInfo'
+      required:
+        - data
+        - pageInfo
+    UserReqBody:
+      type: object
+      properties:
+        usernames:
+          type: string
+        email:
+          type: string
+        addresses:
+          type: array
+          items:
+            $ref: '#/components/schemas/Address'
+      required:
+        - usernames
+        - email
+        - addresses
+    AddressResponse:
+      type: object
+      properties:
+        userId:
+          type: string
+          example: jhs343dbf-34324-34kdsjn-354
+          description: User ID [uuid]
+        addrLine1:
+          type: string
+        addrLine2:
+          type: string
+        pincode:
+          type: string
+        city:
+          type: string
+        country:
+          type: string
+        id:
+          type: string
+          example: jhs343dbf-34324-34kdsjn-354
+          description: Product ID [uuid]
+        links:
+          type: array
+          items:
+            $ref: '#/components/schemas/Link'
+      required:
+        - userId
+        - addrLine1
+        - addrLine2
+        - pincode
+        - city
+        - country
+        - id
+        - links
+    Product:
+      type: object
+      properties:
+        name:
+          type: string
+          example: blue shirt
+          description: Product name
+        description:
+          type: string
+          example: blue shirt designed by marco polo. limited edition.
+          description: Product description
+        categoryId:
+          type: string
+          example: jhs343dbf-34324-34kdsjn-354
+          description: Product ID [uuid]
+        price:
+          type: number
+          example: 500
+          description: Price of the product
+        inventoryId:
+          type: string
+        imageUrls:
+          example:
+            - url1
+            - url2
+          description: images of the products
+          type: array
+          items:
+            type: string
+        id:
+          type: string
+          example: jhs343dbf-34324-34kdsjn-354
+          description: Product ID [uuid]
+      required:
+        - name
+        - description
+        - categoryId
+        - price
+        - inventoryId
+        - imageUrls
+        - id
+    CartItem:
+      type: object
+      properties:
+        id:
+          type: string
+          example: jhs343dbf-34324-34kdsjn-354
+          description: CartItem ID [uuid]
+        cartId:
+          type: string
+          example: jhs343dbf-34324-34kdsjn-354
+          description: Cart ID [uuid]
+        product:
+          $ref: '#/components/schemas/Product'
+        quantity:
+          type: number
+      required:
+        - id
+        - cartId
+        - product
+        - quantity
+    Order:
+      type: object
+      properties:
+        userId:
+          type: string
+          example: jhs343dbf-34324-34kdsjn-354
+          description: User ID [uuid]
+        item:
+          $ref: '#/components/schemas/CartItem'
+        status:
+          type: string
+        address:
+          $ref: '#/components/schemas/Address'
+        id:
+          type: string
+          example: jhs343dbf-34324-34kdsjn-354
+          description: Order ID [uuid]
+        links:
+          type: array
+          items:
+            $ref: '#/components/schemas/Link'
+      required:
+        - userId
+        - item
+        - status
+        - address
+        - id
+        - links
+    ProductResponse:
+      type: object
+      properties:
+        name:
+          type: string
+          example: blue shirt
+          description: Product name
+        description:
+          type: string
+          example: blue shirt designed by marco polo. limited edition.
+          description: Product description
+        categoryId:
+          type: string
+          example: jhs343dbf-34324-34kdsjn-354
+          description: Product ID [uuid]
+        price:
+          type: number
+          example: 500
+          description: Price of the product
+        inventoryId:
+          type: string
+        imageUrls:
+          example:
+            - url1
+            - url2
+          description: images of the products
+          type: array
+          items:
+            type: string
+        id:
+          type: string
+          example: jhs343dbf-34324-34kdsjn-354
+          description: Product ID [uuid]
+        links:
+          type: array
+          items:
+            $ref: '#/components/schemas/Link'
+      required:
+        - name
+        - description
+        - categoryId
+        - price
+        - inventoryId
+        - imageUrls
+        - id
+        - links
+    ProductListResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/ProductResponse'
+        pageInfo:
+          $ref: '#/components/schemas/PageInfo'
+      required:
+        - data
+        - pageInfo
+    ProductReqBody:
+      type: object
+      properties:
+        name:
+          type: string
+          example: blue shirt
+          description: Product name
+        description:
+          type: string
+          example: blue shirt designed by marco polo. limited edition.
+          description: Product description
+        categoryId:
+          type: string
+          example: jhs343dbf-34324-34kdsjn-354
+          description: Product ID [uuid]
+        price:
+          type: number
+          example: 500
+          description: Price of the product
+        inventoryId:
+          type: string
+        imageUrls:
+          example:
+            - url1
+            - url2
+          description: images of the products
+          type: array
+          items:
+            type: string
+      required:
+        - name
+        - description
+        - categoryId
+        - price
+        - inventoryId
+        - imageUrls
+    AddressListResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Address'
+        pageInfo:
+          $ref: '#/components/schemas/PageInfo'
+      required:
+        - data
+        - pageInfo
+    AddressReqBody:
+      type: object
+      properties:
+        userId:
+          type: string
+          example: jhs343dbf-34324-34kdsjn-354
+          description: User ID [uuid]
+        addrLine1:
+          type: string
+        addrLine2:
+          type: string
+        pincode:
+          type: string
+        city:
+          type: string
+        country:
+          type: string
+      required:
+        - userId
+        - addrLine1
+        - addrLine2
+        - pincode
+        - city
+        - country
+    Category:
+      type: object
+      properties:
+        name:
+          type: string
+          example: shirts
+          enum:
+            - shirts
+            - pants
+            - shoes
+            - wallet
+            - phone
+          description: Category name
+        id:
+          type: string
+          example: jdbf-4794u5n-jsdfb-34dhb
+          description: category identifier [uuid]
+        links:
+          type: array
+          items:
+            $ref: '#/components/schemas/Link'
+      required:
+        - name
+        - id
+        - links
+    CategoryListResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Category'
+        pageInfo:
+          $ref: '#/components/schemas/PageInfo'
+      required:
+        - data
+        - pageInfo
+    CategoryReqBody:
+      type: object
+      properties:
+        name:
+          type: string
+          example: shirts
+          enum:
+            - shirts
+            - pants
+            - shoes
+            - wallet
+            - phone
+          description: Category name
+      required:
+        - name
+    OrderListResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Order'
+        pageInfo:
+          $ref: '#/components/schemas/PageInfo'
+      required:
+        - data
+        - pageInfo
+    OrderReqBody:
+      type: object
+      properties:
+        userId:
+          type: string
+          example: jhs343dbf-34324-34kdsjn-354
+          description: User ID [uuid]
+        item:
+          $ref: '#/components/schemas/CartItem'
+        status:
+          type: string
+        address:
+          $ref: '#/components/schemas/Address'
+      required:
+        - userId
+        - item
+        - status
+        - address
+    CheckoutRequestBody:
+      type: object
+      properties:
+        cartId:
+          type: string
+          example: jhs343dbf-34324-34kdsjn-354
+          description: Cart ID [uuid]
+      required:
+        - cartId
+    Cart:
+      type: object
+      properties:
+        id:
+          type: string
+          example: jhs343dbf-34324-34kdsjn-354
+          description: Cart ID [uuid]
+        userId:
+          type: string
+          example: jhs343dbf-34324-34kdsjn-354
+          description: User ID [uuid]
+        cartItems:
+          $ref: '#/components/schemas/CartItem'
+        totalAmount:
+          type: number
+        discount:
+          type: number
+        dueAmount:
+          type: number
+      required:
+        - id
+        - userId
+        - cartItems
+        - totalAmount
+        - discount
+        - dueAmount
+    PaymentRequestBody:
+      type: object
+      properties:
+        cartId:
+          type: string
+          example: jhs343dbf-34324-34kdsjn-354
+          description: Cart ID [uuid]
+        addressId:
+          type: string
+          example: jhs343dbf-34324-34kdsjn-354
+          description: Address ID [uuid]
+      required:
+        - cartId
+        - addressId
+    TrxRequestBody:
+      type: object
+      properties:
+        orderId:
+          type: string
+          example: jhs343dbf-34324-34kdsjn-354
+          description: Order ID [uuid]
+      required:
+        - orderId
+    Inventory:
+      type: object
+      properties:
+        quantity:
+          type: number
+          example: 20
+          description: number items available for this product
+        productId:
+          type: string
+          example: jhs343dbf-34324-34kdsjn-354
+          description: Product ID [uuid]
+        id:
+          type: string
+          example: jhs343dbf-34324-34kdsjn-354
+          description: Inventory ID [uuid]
+        links:
+          type: array
+          items:
+            $ref: '#/components/schemas/Link'
+      required:
+        - quantity
+        - productId
+        - id
+        - links
+    InventoryListResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Inventory'
+        pageInfo:
+          $ref: '#/components/schemas/PageInfo'
+      required:
+        - data
+        - pageInfo
+    InventoryReqBody:
+      type: object
+      properties:
+        quantity:
+          type: number
+          example: 20
+          description: number items available for this product
+        productId:
+          type: string
+          example: jhs343dbf-34324-34kdsjn-354
+          description: Product ID [uuid]
+      required:
+        - quantity
+        - productId
+    Payment:
+      type: object
+      properties:
+        cartId:
+          type: string
+          example: jhs343dbf-34324-34kdsjn-354
+          description: Cart ID [uuid]
+        id:
+          type: string
+          example: jhs343dbf-34324-34kdsjn-354
+          description: Payment ID [uuid]
+        userId:
+          type: string
+          example: jhs343dbf-34324-34kdsjn-354
+          description: User ID [uuid]
+      required:
+        - cartId
+        - id
+        - userId
+    PaymentListResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Payment'
+        pageInfo:
+          $ref: '#/components/schemas/PageInfo'
+      required:
+        - data
+        - pageInfo
