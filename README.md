@@ -20,6 +20,25 @@
   # 2. Response codes/Payload:
     
     refer to api-spec.yaml file. you can you use https://editor.swagger.io for preview.
+    
+        '200': Response with content
+       
+        '204':
+          description: No Content
+        '400':
+          description: Bad Request
+        '401':
+          description: Request Unauthorized
+        '404':
+          description: Not Found
+        '406':
+          description: Not Acceptable
+        '500':
+          description: Internal Server Error
+        '502':
+          description: Bad Gateway
+        '504':
+          description: Gateway Timeout
 
   # 3. Common Headers:
 
