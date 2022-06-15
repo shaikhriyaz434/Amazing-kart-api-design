@@ -1,9 +1,6 @@
 ## Amazing-kart-api-design
-
+refer to api-spec.yaml file. you can you use [Swagger Editer](https://editor.swagger.io) for preview.
   # 1. Resources/collections:
-    
-    refer to api-spec.yaml file. you can you use https://editor.swagger.io for preview.
-
     
     list of resource:
       a. Users
